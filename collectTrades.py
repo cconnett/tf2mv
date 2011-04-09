@@ -24,16 +24,16 @@ def getNewData():
     db.commit()
 
 def correlateTrades():
-    completedTrades = 0
+    addedTrades = 0
     cursor = db.cursor()
     cursor.execute("""
     select t1.timestamp, t1.player, t2.player, t1.id, t2.id
     from itemsRecieved t1
     join itemsRecieved t2
-    where t1.player < t2.player
-    and datetime(t1.timestamp) between datetime(t2.timestamp, '-3 seconds') and datetime(t2.timestamp, '3 seconds')
+    on t1.timestamp between datetime(t2.timestamp, '-3 seconds') and datetime(t2.timestamp, '3 seconds')
+    where t1.player < t2.player;
     """)
-    for (k, g) in itertools.groupby(cursor.fetchall(), lambda t: t[:3]):
+    for (k, g) in itertools.groupby(cursor.fetchall(), lambda t: t[1:3]):
         try:
             cursor.execute('insert or abort into trades values (NULL, ?, ?)', (k[0], k[1]))
         except sqlite3.IntegrityError:
@@ -45,14 +45,42 @@ def correlateTrades():
             items.add(i2)
         cursor.executemany('insert into tradeItems values (?, ?)',
                            [(trade, i) for i in items])
-        completedTrades += 1
+        addedTrades += 1
     db.commit()
-    print >> sys.stderr, 'Completed {0} trades.'.format(completedTrades)
+    print >> sys.stderr, 'Added {0} trades.'.format(addedTrades)
 
-bannedItems = set(['A Carefully Wrapped Gift'])
+bannedItems = set([
+    'A Carefully Wrapped Gift',
+    'Samur-Eye',
+    'Medi Gun',
+    ])
 substituteItems = {
     'Reclaimed Metal': (1/3., 'Refined Metal'),
     'Scrap Metal': (1/9., 'Refined Metal'),
+
+    'Class Token - Scout':   (1, 'Class Token'),
+    'Class Token - Soldier': (1, 'Class Token'),
+    'Class Token - Pyro':    (1, 'Class Token'),
+    'Class Token - Demoman': (1, 'Class Token'),
+    'Class Token - Heavy':   (1, 'Class Token'),
+    'Class Token - Engineer':(1, 'Class Token'),
+    'Class Token - Medic':   (1, 'Class Token'),
+    'Class Token - Sniper':  (1, 'Class Token'),
+    'Class Token - Spy':     (1, 'Class Token'),
+
+    'Slot Token - Primary':  (1, 'Slot Token'),
+    'Slot Token - Secondary':(1, 'Slot Token'),
+    'Slot Token - Melee':    (1, 'Slot Token'),
+
+    'Scout Mask':   (1, 'Class Halloween Mask'),
+    'Soldier Mask': (1, 'Class Halloween Mask'),
+    'Pyro Mask':    (1, 'Class Halloween Mask'),
+    'Demoman Mask': (1, 'Class Halloween Mask'),
+    'Heavy Mask':   (1, 'Class Halloween Mask'),
+    'Engineer Mask':(1, 'Class Halloween Mask'),
+    'Medic Mask':   (1, 'Class Halloween Mask'),
+    'Sniper Mask':  (1, 'Class Halloween Mask'),
+    'Spy Mask':     (1, 'Class Halloween Mask'),
     }
 
 def computeMannconomyMatrix():
@@ -61,6 +89,7 @@ def computeMannconomyMatrix():
     itemNames = set(row[0] for row in cursor.fetchall())
     itemNames -= bannedItems
     itemNames -= set(substituteItems.keys())
+    itemNames |= set(item for (val, item) in substituteItems.values())
     items = dict(zip(itemNames, itertools.count()))
 
     n = len(items)
@@ -68,7 +97,15 @@ def computeMannconomyMatrix():
 
     A = scipy.zeros((1,n))
 
-    cursor.execute('select ti.trade,i.player,i.item from tradeItems ti join itemsRecieved i on ti.item = i.id order by ti.trade, i.player')
+    cursor.execute('''
+    select ti.trade,i.player,i.item
+    from tradeItems ti
+    join itemsRecieved i
+    on ti.item = i.id
+    where trade not in
+      (select trade from tradeItems out
+       where (select count(*) from tradeItems inn where out.item = inn.item) > 1)
+    order by ti.trade, i.player''')
     rows = cursor.fetchall()
     for (_, g) in itertools.groupby(rows, lambda r: r[0]):
         tradeSummary = scipy.zeros(n)
@@ -94,16 +131,22 @@ def computeMannconomyMatrix():
     b[0] = 1
 
     df = n - scipy.linalg.lstsq(A, b)[2]
+    x = scipy.optimize.nnls(A, b)[0]
+    resid = scipy.dot(A, x)
+    print resid.shape
+    print list('{0:.2f}'.format(e) for e in sorted(abs(resid) / x[refined]))
+
+    zeroCount = len([val for val in x if val < 1e-6])
+    print >> sys.stderr, 'Tracking {0} items, {1} have value 0.00.'.format(n, zeroCount)
     if df:
         if df == 1:
             print >> sys.stderr, '1 degree of freedom remains.'
         else:
             print >> sys.stderr, '{0} degrees of freedom remain.'.format(df)
-    x = scipy.optimize.nnls(A, b)[0]
-    #print x
+
     for (item, value) in sorted(zip(itemNames, x / x[refined]), key=lambda t: -t[1]):
-        print '{0:45s}{1:.2f}'.format(item, value)
-        pass
+        if value >= 0.01:
+            print '{0:45s}{1:.2f}'.format(item, value)
 
 def sign(n):
     if n == 0:
@@ -112,6 +155,9 @@ def sign(n):
         return -1
     return 1
 
-getNewData()
-correlateTrades()
+#getNewData()
+#correlateTrades()
 computeMannconomyMatrix()
+
+# All trades involving a particular item name.
+#select * from tradeItems ti join itemsRecieved ir on ti.item = ir.id where ti.trade in (select trade from tradeItems join itemsRecieved on tradeItems.item = itemsRecieved.id where itemsRecieved.item like '%Hue%');
