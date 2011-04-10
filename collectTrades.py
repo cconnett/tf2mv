@@ -130,14 +130,25 @@ def computeMannconomyMatrix():
 
     b[0] = 1
 
-    df = n - scipy.linalg.lstsq(A, b)[2]
     x = scipy.optimize.nnls(A, b)[0]
     resid = scipy.dot(A, x)
-    print resid.shape
-    print list('{0:.2f}'.format(e) for e in sorted(abs(resid) / x[refined]))
+    resid[0] = 0 # residual on first equation (refined = refined) doesn't count
+
+    sortedResid = list(sorted(abs(resid)))
+    threshold = 2/3. * x[refined] #sortedResid[int(round(0.80 * len(sortedResid)))]
+    for r in range(len(A)):
+        if resid[r] > threshold:
+            A[r] = 0
+            A[0][refined] = 1
+            b[r] = 1
+    scaledThreshold = threshold / x[refined]
+
+    df = n - scipy.linalg.lstsq(A, b)[2]
+    x = scipy.optimize.nnls(A, b)[0]
 
     zeroCount = len([val for val in x if val < 1e-6])
     print >> sys.stderr, 'Tracking {0} items, {1} have value 0.00.'.format(n, zeroCount)
+    print >> sys.stderr, 'Ignoring trades imbalanced by more than {0:.2f} refined metal.'.format(scaledThreshold)
     if df:
         if df == 1:
             print >> sys.stderr, '1 degree of freedom remains.'
