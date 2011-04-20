@@ -56,6 +56,9 @@ bannedItems = set([
     'Shotgun',
     ])
 weapons = [
+    "The Battalion's Backup",
+    "The Ambassador",
+    "The Backburner",
     "Loch-n-Load",
     "Buffalo Steak Sandvich",
     "Half-Zatoichi",
@@ -135,6 +138,7 @@ substituteItems = {
     'Slot Token - Primary':  (1, 'Slot Token'),
     'Slot Token - Secondary':(1, 'Slot Token'),
     'Slot Token - Melee':    (1, 'Slot Token'),
+    'Slot Token - PDA2':    (1, 'Slot Token'),
 
     'Scout Mask':   (1, 'Class Halloween Mask'),
     'Soldier Mask': (1, 'Class Halloween Mask'),
