@@ -3,10 +3,10 @@ Team Fortress 2 Market Values
 
 This project consists of three components:
 
-* A sourcemod plugin which adds item_found events to the game log.
+* A sourcemod plugin which posts item_found events to a webservice.
 * A python module for analyzing trades and determining average market values.
 * A website built with [Flask](http://flask.pocoo.org/) to show market
-  values, and related applications of market values.
+  values and related applications of market values.
 
 Sourcemod plugin (plugin)
 -------------------------
