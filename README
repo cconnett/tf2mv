@@ -12,10 +12,11 @@ Sourcemod plugin (plugin)
 -------------------------
 
 This is a very simple Sourcemod plugin that hooks the "item_found"
-game event and publishes a line to the game log each time that event
-fires.  When remote logging is enabled, the game log is forwarded to
-addresses added with the `logaddress_add` command.  Trades are then
-extracted and analyzed with the analyzer.
+game event and posts the event to a trade collection webservice on
+tf2mv.com.  Trades are periodically analyzed with the analyzer.
+
+This plugin requires the cURL sourcemod extention.
+https://code.google.com/p/sourcemod-curl-extension/
 
 Python analyzer (analyzer)
 --------------------------
