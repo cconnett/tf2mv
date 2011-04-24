@@ -1,0 +1,27 @@
+mail:
+  smtp: mail.tf2mv.com
+  from: no-reply@tf2mv.com
+  errors: errors@tf2mv.com
+  errorsubject: tf2mv Error Logged
+
+database:
+  instances:
+    &production production:
+        host: mysql.tf2mv.com
+        database: tf2mv
+    &development development:
+        host: mysql.tf2mv.connett.net
+        database: tf2mv
+  users:
+    primary:
+      username: tf2mv
+      password:
+      instance: *production
+    writeonly:
+      username: item_found
+      password:
+      instance: *production
+
+webservice:
+  url: http://tf2mv.com/itemFound
+  port: 80
