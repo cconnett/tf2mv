@@ -3,12 +3,19 @@ from flask import request
 
 import MySQLdb
 import Queue
+import yaml
+
+config = yaml.load(file('../config.yml').read())
+database = config['database']['users']['writeonly']
 
 # Super simple connection pooling
-mysqls = Queue.Queue()
-for i in range(1):
+connection_pool = Queue.Queue()
+for i in range(config['itemFound']['poolsize']):
     try:
-        mysqls.put(MySQLdb.connect(host='mysql.tf2mv.com', user='item_found', passwd='redbull', db='tf2mv'))
+        connection_pool.put(MySQLdb.connect(host=database['instance']['hostname'],
+                                            user=database['username'],
+                                            passwd=database['password'],
+                                            db=database['instance']['database']))
     except:
         pass
         raise
@@ -16,19 +23,19 @@ for i in range(1):
 @app.route('/itemFound', methods=['POST'])
 def itemFound():
     try:
-        mysql = mysqls.get(block=False)
+        connection = connection_pool.get(block=False)
     except Queue.Empty:
-        app.logger.error('Not enough mysql connections.')
+        app.logger.error('Not enough database connections.')
         return ''
     try:
-        cursor = mysql.cursor()
+        cursor = connection.cursor()
         cursor.execute('insert into item_found values (NULL, INET_ATON(%s), NULL, %s, %s, %s, %s, %s)',
                        (request.remote_addr, request.form['steamid'], request.form['method'],
                         request.form['quality'], request.form['item'], request.form['propername'] == '1'))
-        mysql.commit()
+        connection.commit()
     except Exception as e:
         app.logger.error(e)
     finally:
         cursor.close()
-        mysqls.put(mysql)
+        connection_pool.put(connection)
     return ''

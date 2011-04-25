@@ -5,11 +5,11 @@
 
 #define PLUGIN_VERSION "1.0"
 #define PLUGIN_URL "http://tf2mv.com"
-#define URL "http://192.168.1.3/itemFound"
-#define PORT 5000
+#define URL "http://tf2mv.com/itemFound"
+#define PORT 80
 
 public Plugin:myinfo = {
-	name = "Trading Logger",
+	name = "item_found Logger",
 	author = "Chris 'AlphaChannel' Connett <chris@connett.net>",
 	description = "Log all item_found events to a webservice.",
 	version = PLUGIN_VERSION,
