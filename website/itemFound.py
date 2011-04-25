@@ -9,7 +9,7 @@ database = config['database']['users']['writeonly']
 
 # Super simple connection pooling
 connection_pool = Queue.Queue()
-for i in range(config['itemFound']['poolsize']):
+for i in range(config['application']['poolsize']):
     try:
         connection_pool.put(MySQLdb.connect(host=database['instance']['hostname'],
                                             user=database['username'],
