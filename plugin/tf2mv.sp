@@ -3,14 +3,11 @@
 #include <sourcemod>
 #include <cURL>
 
-#define PLUGIN_VERSION "1.0"
-#define PLUGIN_URL "http://tf2mv.com"
-#define URL "http://tf2mv.com/itemFound"
-#define PORT 80
+#include "site.inc"
 
 public Plugin:myinfo = {
 	name = "item_found Logger",
-	author = "Chris 'AlphaChannel' Connett <chris@connett.net>",
+	author = "Chris 'AlphaChannel' Connett <plugin@tf2mv.com>",
 	description = "Log all item_found events to a webservice.",
 	version = PLUGIN_VERSION,
 	url = PLUGIN_URL
@@ -79,8 +76,8 @@ public Action:Event_ItemFound(Handle:event, const String:name[], bool:dontBroadc
 
           curl_easy_setopt_int(curl, CURLOPT_POST, 1);
           curl_easy_setopt_handle(curl, CURLOPT_HTTPHEADER, headerlist);
-          curl_easy_setopt_string(curl, CURLOPT_URL, URL);
-          curl_easy_setopt_int(curl, CURLOPT_PORT, PORT);
+          curl_easy_setopt_string(curl, CURLOPT_URL, TARGET_URL);
+          curl_easy_setopt_int(curl, CURLOPT_PORT, TARGET_PORT);
           curl_easy_setopt_handle(curl, CURLOPT_HTTPPOST, formpost);
           curl_easy_perform_thread(curl, onComplete);
         }
