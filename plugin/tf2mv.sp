@@ -3,14 +3,12 @@
 #include <sourcemod>
 #include <cURL>
 
-#include "site.inc"
-
 public Plugin:myinfo = {
 	name = "item_found Logger",
 	author = "Chris 'AlphaChannel' Connett <plugin@tf2mv.com>",
 	description = "Log all item_found events to a webservice.",
 	version = PLUGIN_VERSION,
-	url = PLUGIN_URL
+	url = "http://tf2mv.com/plugin"
 };
 
 new CURL_Default_opt[][2] = {
