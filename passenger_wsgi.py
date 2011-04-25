@@ -2,7 +2,7 @@ import sys
 import os
 import logging
 import yaml
-from logging import SMTPHandler
+from logging.handlers import SMTPHandler
 
 INTERP = os.path.join(os.environ['HOME'], 'flask_env', 'bin', 'python')
 if sys.executable != INTERP:
@@ -15,4 +15,4 @@ mail_handler = SMTPHandler(config['mail']['smtp'], config['mail']['from'],
                            config['mail']['errors'], config['mail']['errorsubject'])
 
 mail_handler.setLevel(logging.ERROR)
-app.logger.addHandler(mail_handler)
+application.logger.addHandler(mail_handler)
