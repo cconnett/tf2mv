@@ -1,11 +1,10 @@
-from website import app
+from website import app, config
 from flask import request
 
 import MySQLdb
 import Queue
 import yaml
 
-config = yaml.load(file('../config.yml').read())
 database = config['database']['users']['writeonly']
 
 # Super simple connection pooling
