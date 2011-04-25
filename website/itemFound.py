@@ -5,15 +5,15 @@ import MySQLdb
 import Queue
 import yaml
 
-database = config['database']['users']['writeonly']
+database = config['application']['database']
 
 # Super simple connection pooling
 connection_pool = Queue.Queue()
-for i in range(config['application']['poolsize']):
+for i in range(config['application']['database']['poolsize']):
     try:
         connection_pool.put(MySQLdb.connect(host=database['instance']['hostname'],
-                                            user=database['username'],
-                                            passwd=database['password'],
+                                            user=database['instance']['users']['writeonly']['username'],
+                                            passwd=database['instance']['users']['writeonly']['password'],
                                             db=database['instance']['database']))
     except:
         pass
