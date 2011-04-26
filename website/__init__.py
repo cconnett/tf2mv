@@ -1,7 +1,9 @@
-__all__ = ['config', 'app', 'main', 'itemFound']
+__all__ = ['config', 'app', 'application']
 
-import yaml
+from config import config
+
 from flask import Flask
+application = app = Flask(__name__)
 
-config = yaml.load(file('config.yml').read())
-app = Flask(__name__)
+import main
+import itemFound

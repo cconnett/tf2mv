@@ -27,6 +27,7 @@ database:
         primary: *tf2mv
 
 application:
+  interpreter: /usr/bin/python
   url: http://localhost
   port: 5000
   database:
