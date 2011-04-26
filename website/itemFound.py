@@ -32,7 +32,7 @@ def itemFound():
                        (request.remote_addr, request.form['steamid'], request.form['method'],
                         request.form['quality'], request.form['item'], request.form['propername'] == '1'))
         connection.commit()
-    except Exception as e:
+    except Exception, e:
         app.logger.error(e)
     finally:
         cursor.close()
