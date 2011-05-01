@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>TF2MV</title>
+	<link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" charset="utf-8"/>
+ </head>
+
+ <body>
+{% block content_header %}
+	<div id="header">
+		<div class="left">
+			<div id="logo">
+				<h1><a href="#" title="Team Fortress 2 Market Value">TF2MV</a></h1>
+			</div>
+
+			<div id="search">
+				<form>
+					<input type="search" id="search" placeholder="Bill's Hat" />
+				</form>
+			</div>
+		</div>
+
+		<div class="right">
+			<div id="navigation">
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Shout Outs!</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</div>
+
+			<div id="sign-in">
+				<img src="images/interface/sign-in-steam.jpg" alt="Sign in through Steam" />
+			</div>
+		</div>
+	</div>
+
+	{% endblock %}
+	<div id="container">
+		<div id="content">
+			{% block content %}
+			<p>Sup. Until we get some data there's not much to do. Although I'm not sure what to put on the homepage yet... maybe like a top 10 of some stuff? Top 10 most sought after items, most valuable items, rarest, stuff like that?</p>
+			<p>Or we could have some kind of changelog, that's kind of a boring greeting though. I think stats would be nicer. Open to ideas.</p>
+			{% endblock %}
+		</div>
+{% block content_fooder %}
+<div id="footer">
+	<p>Curated by <a href="http://www.steamcommunity.com/id/chrish">Chrish "Sickboy" Dunne</a> and <a href="http://steamcommunity.com/id/AlphaChannel">Chris "cconnett" Connett.</a></p>
+	<p>Powered by Steam.</p>
+</div>
+{% endblock %}
+	</div>
+ </body>
+</html>
