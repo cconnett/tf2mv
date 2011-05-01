@@ -19,7 +19,7 @@ if not all(os.path.exists(path) for path in requiredFiles):
 
 config = yaml.load(file('../config.yml').read())
 sitefile = file('site.inc', 'w')
-print >> sitefile, '#define PLUGIN_VERSION  "0"' #TODO: git-describe version here
+print >> sitefile, '#define PLUGIN_VERSION  "1.0.0"' #TODO: git-describe version here
 print >> sitefile, '#define TARGET_URL      "{0[application][url]}"'.format(config)
 print >> sitefile, '#define TARGET_PORT      {0[application][port]}'.format(config)
 sitefile.close()

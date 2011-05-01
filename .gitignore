@@ -1,6 +1,6 @@
 *.pyc
 *~
-*.smx
+plugin/*.smx
 
 analyzer/mv.db
 
