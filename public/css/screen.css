@@ -1,0 +1,149 @@
+/*
+--------------------------------------
+	Project: Team Fortress 2 Market Value
+	File: screen.css
+	Author: Chrish Dunne
+	Author URI: http://www.chrishdunnevstheworld.com/
+--------------------------------------
+*/
+
+html {
+	font-size: 16px;
+}
+
+body {
+	background: #292726;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	margin: 0;
+}
+
+
+/* - Header ----- */
+#header {
+	background: #393532;
+	border-bottom: 1px solid #423c39;
+	overflow: auto;
+	padding: 20px;
+}
+
+#header .left {
+	float: left;
+}
+
+#header .right {
+	float: right;
+}
+
+#header #logo {
+	padding: 0 0 0 20px;
+}
+
+#header #logo h1 {
+	font-family: 'TF2 Build', sans-serif;
+	font-size: 3.000em;
+}
+
+#header #logo h1 a {
+	color: #e0d1cc;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px #000;
+}
+
+#header #logo h1 a:hover {
+	color: #fff;
+}
+
+#header #search {
+}
+
+#header #search input[type="search"] {
+	background: #4e4945;
+	border: 2px solid #2a2725;
+	border-radius: 3px;
+	color: #fff;
+	font-size: 0.875em;
+	padding: 3px;
+}
+
+#header #search input::-webkit-input-placeholder {
+    color: #69625e;
+}
+
+#header #search input:-moz-placeholder {
+    color: #69625e;
+}
+
+#header #navigation ul {
+	font-size: 0.875em;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#header #navigation ul li {
+	display: inline;
+	margin: 0 0 0 30px;
+}
+
+#header #navigation ul li a {
+	color: #8cb359;
+	text-decoration: none;
+}
+
+#header #navigation ul li a:hover {
+	border-bottom: 1px solid #fff;
+	color: #fff;
+}
+
+#header #sign-in {
+	margin: 20px 0 0;
+	text-align: right;
+}
+
+
+/* - Container ----- */
+#container {
+	border-top: 1px solid #201e1d;
+	clear: both;
+}
+
+#container #content {
+	margin: 20px auto 0;
+	width: 960px;
+}
+
+#container #content p {
+	color: #e0d1cc;
+	font-size: 0.875em;
+	line-height: 18px;
+	margin: 0 0 18px;
+	padding: 0;
+}
+
+#footer {
+	border-top: 1px solid #44403f;
+	margin: 20px auto 0;
+	padding: 20px 0 0;
+	text-align: center;
+	width: 960px;
+}
+
+#footer p {
+	color: #393532;
+	line-height: 18px;
+	margin: 0 0 18px;
+	padding: 0;
+}
+
+#footer a {
+	border-bottom: 1px dashed #393532;
+	color: #393532;
+	text-decoration: none;
+}
