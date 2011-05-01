@@ -4,3 +4,7 @@ from website import app
 @app.route("/")
 def hello():
     return render_template('index.html')
+
+@app.route("/plugin")
+def plugin():
+    return render_template('plugin.html')
