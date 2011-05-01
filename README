@@ -8,7 +8,7 @@ This project consists of three components:
 * A website built with [Flask](http://flask.pocoo.org/) to show market
   values and related applications of market values.
 
-Sourcemod plugin (plugin)
+Sourcemod plugin (plugin) (git submodule)
 -------------------------
 
 This is a very simple Sourcemod plugin that hooks the "item_found"
@@ -28,7 +28,7 @@ non-negative least squares optimization to minimize the residuals on
 the system of equations defined by all trades on record (each trade is
 considered an equation).
 
-The website (website and public)
+The website (website)
 --------------------------------
 
 This is all the code and resources behind tf2mv.com.
