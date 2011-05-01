@@ -3,3 +3,8 @@
 *.smx
 
 analyzer/mv.db
+
+bin/
+include/
+lib/
+tmp/
