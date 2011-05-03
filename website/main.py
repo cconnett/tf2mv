@@ -8,3 +8,7 @@ def hello():
 @app.route("/plugin")
 def plugin():
     return render_template('plugin.html')
+
+@app.route("/about")
+def about():
+    return render_template('about.html')
