@@ -9,6 +9,17 @@
 
 html {
 	font-size: 16px;
+        color: lightgrey;
+}
+
+@font-face {
+    font-family: "TF2 Build";
+    src: url("/static/fonts/tf2build.ttf");
+}
+
+@font-face {
+    font-family: "TF2 Secondary";
+    src: url("/static/fonts/tf2secondary.ttf");
 }
 
 body {
@@ -24,6 +35,14 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 }
 
+h1,h2,h3 {
+    font-family: "TF2 Build";
+    color: #eee;
+}
+
+a {
+    color: white;
+}
 
 /* - Header ----- */
 #header {
@@ -41,22 +60,27 @@ h1, h2, h3, h4, h5, h6 {
 	float: right;
 }
 
-#header #logo {
-	padding: 0 0 0 20px;
-}
-
-#header #logo h1 {
-	font-family: 'TF2 Build', sans-serif;
-	font-size: 3.000em;
-}
-
-#header #logo h1 a {
-	color: #e0d1cc;
+#header #logo a {
 	text-decoration: none;
-	text-shadow: 1px 1px 1px #000;
 }
 
-#header #logo h1 a:hover {
+#header #logo a img {
+    display:block;
+    float: left;
+    vertical-align: text-bottom;
+    margin-right:4px;
+    border:none;
+}
+#header #logo a span {
+	color: #e0d1cc;
+        padding:0;
+
+	text-shadow: 1px 1px 1px #000;
+        font-family: 'TF2 Build', sans-serif;
+	font-size: 3em;
+}
+
+#header #logo a span:hover {
 	color: #fff;
 }
 
@@ -115,8 +139,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #container #content {
-	margin: 20px auto 0;
-	width: 960px;
+	margin: 20px auto 0 20px;
+	max-width: 960px;
 }
 
 #container #content p {
@@ -132,7 +156,7 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 20px auto 0;
 	padding: 20px 0 0;
 	text-align: center;
-	width: 960px;
+	max-width: 960px;
 }
 
 #footer p {

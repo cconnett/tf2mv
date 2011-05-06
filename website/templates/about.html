@@ -1,3 +1,44 @@
 {% extends "index.html" %}
 {% block content %}
+
+<h1>What is this?</h1>
+
+<p>Team Fortress 2 Market Values aims to be a useful resource for item
+prices in the Team Fortress 2 Mann Co. Economy.  Part research
+experiment, part community service, we try to provide accurate and
+timely data on what items currently trade for.</p>
+
+<h1>How does it work?</h1>
+
+<p>We have a <a href="/plugin">Sourcemod plugin</a> for TF2 servers
+that sends us a message every time a trade occurs on that server.
+With the help of participating servers, we can sample the trades going
+on in the Mann Co. Economy, apply some simple data analysis
+algorithms, and average prices start to emerge, like a stock exchange.
+</p>
+
+<p>The information on this site is entirely data-driven.  We don't
+inject our opinion on what prices "should" be in any way, and we keep
+updating the prices as more trade data streams in.
+</p>
+
+<h1>How can I contribute?</h1>
+
+<p>Our listings depend on having a representative sample of trades.
+If you are an admin for a TF2 server (especially a dedicated trading
+server), you can help by installing our <a href="/plugin">Sourcemod
+plugin</a>.  It will passively send us an update whenever a trade
+occurs on your server.  Trade data is what makes this site work.  With
+the help of <a href="/contributors">generous server admins like
+you</a>, we can provide the TF2 community with a fun and useful
+resource.
+</p>
+
+<h1>Who made this?</h1>
+
+<p>Chris "AlphaChannel" Connett wrote the Sourcemod plugin and website
+functionality.  Chrish "Sickboy" Dunne recognized the need for a
+service like this and created the website design.
+</p>
+
 {% endblock %}
