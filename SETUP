@@ -1,0 +1,15 @@
+0. git clone (already done)
+
+1. Use virtualenv to create a Python virtual environment which you can
+   install Python packages.
+
+   python ./virtualenv-1.5.2/virtualenv.py --no-site-packages --distribute .
+
+2. Install required packages.
+
+   pip install -r requires.txt
+
+(At this point, a local development server should work.  `python developerInstance.py`)
+
+3. Edit config.yml with local settings.  You must at least set
+   application.interpreter to the interpreter in your virtualenv.
