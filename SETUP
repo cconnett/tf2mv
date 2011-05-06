@@ -16,5 +16,6 @@
 
 (At this point, a local development server should work.  `python developerInstance.py`)
 
-4. Edit config.yml with local settings.  You must at least set
-   application.interpreter to the interpreter in your virtualenv.
+4. Copy default.config.yml to config.yml and populate with local
+   settings.  You must at least set application.interpreter to the
+   interpreter in your virtualenv.
