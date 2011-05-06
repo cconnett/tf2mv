@@ -15,9 +15,8 @@ for i in range(config['application']['database']['poolsize']):
                                             user=database['instance']['users']['writeonly']['username'],
                                             passwd=database['instance']['users']['writeonly']['password'],
                                             db=database['instance']['database']))
-    except:
-        pass
-        raise
+    except Exception, e:
+        app.logger.error(e)
 
 @app.route('/itemFound', methods=['POST'])
 def itemFound():
