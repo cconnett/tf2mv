@@ -12,3 +12,7 @@ def plugin():
 @app.route("/")
 def about():
     return render_template('about.html')
+
+@app.route("/contributors")
+def contributors():
+    return render_template('contributors.html')
