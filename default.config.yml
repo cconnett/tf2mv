@@ -3,6 +3,9 @@ mail:
   from: no-reply@tf2mv.com
   errors: errors@tf2mv.com
   errorsubject: tf2mv Error Logged
+  credentials:
+    username: postmaster@tf2mv.com
+    password:
 
 database:
   users:
