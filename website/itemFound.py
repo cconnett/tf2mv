@@ -8,23 +8,45 @@ import yaml
 database = config['application']['database']
 
 # Super simple connection pooling
-connection_pool = Queue.Queue()
-for i in range(config['application']['database']['poolsize']):
-    try:
-        connection_pool.put(MySQLdb.connect(host=database['instance']['hostname'],
-                                            user=database['instance']['users']['writeonly']['username'],
-                                            passwd=database['instance']['users']['writeonly']['password'],
-                                            db=database['instance']['database']))
-    except Exception, e:
-        app.logger.error(e)
+class ConnectionPool(object):
+    def __init__(self):
+        self._pool = Queue.Queue()
+
+    def _newConnection(self):
+        MySQLdb.connect(host=database['instance']['hostname'],
+                        user=database['instance']['users']['writeonly']['username'],
+                        passwd=database['instance']['users']['writeonly']['password'],
+                        db=database['instance']['database'])
+
+    def _addConnection(self):
+        try:
+            self._pool.put(self._newConnection())
+        except Exception, e:
+            app.logger.error(e)
+
+    def get(self):
+        try:
+            connection = connection_pool.get(block=False)
+        except Queue.Empty:
+            self._addConnection()
+        try:
+            connection = connection_pool.get(block=False)
+        except Queue.Empty:
+            app.logger.error('Cannot connect to database.')
+            raise Exception('Cannot connect to database.')
+
+    def put(self, connection):
+        self._pool.put(connection)
+
+pool = ConnectionPool()
 
 @app.route('/itemFound', methods=['POST'])
 def itemFound():
     try:
-        connection = connection_pool.get(block=False)
-    except Queue.Empty:
-        app.logger.error('Not enough database connections.')
+        connection = pool.get()
+    except:
         return ''
+
     try:
         cursor = connection.cursor()
         cursor.execute('insert into item_found values (NULL, INET_ATON(%s), NULL, %s, %s, %s, %s, %s)',
@@ -35,5 +57,5 @@ def itemFound():
         app.logger.error(e)
     finally:
         cursor.close()
-        connection_pool.put(connection)
+        pool.put(connection)
     return ''
