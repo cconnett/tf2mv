@@ -18,22 +18,16 @@ class ConnectionPool(object):
                         passwd=database['instance']['users']['writeonly']['password'],
                         db=database['instance']['database'])
 
-    def _addConnection(self):
-        try:
-            self._pool.put(self._newConnection())
-        except Exception, e:
-            app.logger.error(e)
-
     def get(self):
         try:
             connection = connection_pool.get(block=False)
         except Queue.Empty:
-            self._addConnection()
-        try:
-            connection = connection_pool.get(block=False)
-        except Queue.Empty:
-            app.logger.error('Cannot connect to database.')
-            raise Exception('Cannot connect to database.')
+            try:
+                connection = self._newConnection()
+            except Exception, e:
+                app.logger.error(e)
+                raise Exception('Cannot connect to database.')
+        return connection
 
     def put(self, connection):
         self._pool.put(connection)
