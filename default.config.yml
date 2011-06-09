@@ -35,4 +35,3 @@ application:
   port: 5000
   database:
     instance: *test
-    poolsize: 1
