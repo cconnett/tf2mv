@@ -1,62 +1,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
- <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
  <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>TF2MV</title>
 	<link rel="stylesheet" href="/static/css/screen.css" type="text/css" media="screen" charset="utf-8"/>
-        <link rel="icon" href="/static/images/icon.png"/>
+	<link rel="icon" href="/static/images/icon.png"/>
  </head>
 
  <body>
-{% block content_header %}
+	{% block content_header %}
 	<div id="header">
-		<div class="left">
-			<div id="logo">
-                          <a href="/" title="Team Fortress 2 Market Value">
-                            <img src="/static/images/logo.png"/>
-                            <span>TF2MV</span>
-                          </a>
-			</div>
+		<form>
+			<h1><a href="/" title="Market Value">TF2MV</a></h1>
+			<input type="search" id="search" placeholder="Bill's Hat" />
+		</form>
 
-			<div id="search">
-				<form>
-					<input type="search" id="search" placeholder="Bill's Hat" />
-				</form>
-			</div>
-		</div>
-
-		<div class="right">
-			<div id="navigation">
-				<ul>
-					<li><a href="/">Home</a></li>
-					<li><a href="/about">About</a></li>
-					<li><a href="/plugin">Plugin</a></li>
-					<li><a href="mailto:feedback@tf2mv.com">Contact</a></li>
-				</ul>
-			</div>
-
-			<div id="sign-in">
-				<img src="/static/images/interface/sign-in-steam.jpg" alt="Sign in through Steam" />
-			</div>
+		<div id="navigation">
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li><a href="/about">About</a></li>
+				<li><a href="/plugin">Plugin</a></li>
+				<li><a href="mailto:feedback@tf2mv.com">Contact</a></li>
+			</ul>
 		</div>
 	</div>
-
 	{% endblock %}
+
 	<div id="container">
 		<div id="content">
-			{% block content %}
+		{% block content %}
 			<p>Sup. Until we get some data there's not much to do. Although I'm not sure what to put on the homepage yet... maybe like a top 10 of some stuff? Top 10 most sought after items, most valuable items, rarest, stuff like that?</p>
 			<p>Or we could have some kind of changelog, that's kind of a boring greeting though. I think stats would be nicer. Open to ideas.</p>
-			{% endblock %}
-		</div>
-{% block content_fooder %}
-<div id="footer">
-	<p>Curated by <a href="http://www.steamcommunity.com/id/chrish">Chrish "Sickboy" Dunne</a> and <a href="http://steamcommunity.com/id/AlphaChannel">Chris "AlphaChannel" Connett.</a></p>
-	<p>Powered by Steam.</p>
-</div>
-{% endblock %}
+		{% endblock %}
 	</div>
+	
+	{% block content_fooder %}
+	<div id="footer">
+		<p>Curated by <a href="http://www.steamcommunity.com/id/chrish">Chrish "Sickboy" Dunne</a> and <a href="http://steamcommunity.com/id/AlphaChannel">Chris "AlphaChannel" Connett.</a></p>
+		<p>Powered by Steam.</p>
+	</div>
+	{% endblock %}
  </body>
 </html>
