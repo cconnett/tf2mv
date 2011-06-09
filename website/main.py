@@ -16,3 +16,7 @@ def about():
 @app.route("/contributors")
 def contributors():
     return render_template('contributors.html')
+
+@app.route("/privacy")
+def contributors():
+    return render_template('privacy.html')
