@@ -9,17 +9,6 @@
 
 html {
 	font-size: 16px;
-        color: lightgrey;
-}
-
-@font-face {
-    font-family: "TF2 Build";
-    src: url("/static/fonts/tf2build.ttf");
-}
-
-@font-face {
-    font-family: "TF2 Secondary";
-    src: url("/static/fonts/tf2secondary.ttf");
 }
 
 body {
@@ -30,19 +19,6 @@ body {
 	padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	font-weight: normal;
-	margin: 0;
-}
-
-h1,h2,h3 {
-    font-family: "TF2 Build";
-    color: #eee;
-}
-
-a {
-    color: white;
-}
 
 /* - Header ----- */
 #header {
@@ -52,56 +28,44 @@ a {
 	padding: 20px;
 }
 
-#header .left {
+#header form {
 	float: left;
+	text-align: center;
 }
 
-#header .right {
-	float: right;
+#header form h1 {
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 2.625em;
+	font-weight: bold;
+	margin: 0 0 5px;
+	text-shadow: 1px 1px 1px #000;
 }
 
-#header #logo a {
+#header form h1 a {
+	color: #e0d1cc;
 	text-decoration: none;
 }
 
-#header #logo a img {
-    display:block;
-    float: left;
-    vertical-align: text-bottom;
-    margin-right:4px;
-    border:none;
-}
-#header #logo a span {
-	color: #e0d1cc;
-        padding:0;
-
-	text-shadow: 1px 1px 1px #000;
-        font-family: 'TF2 Build', sans-serif;
-	font-size: 3em;
-}
-
-#header #logo a span:hover {
-	color: #fff;
-}
-
-#header #search {
-}
-
-#header #search input[type="search"] {
+#header form input[type="search"] {
 	background: #4e4945;
 	border: 2px solid #2a2725;
-	border-radius: 3px;
+	border-radius: 5px;
 	color: #fff;
 	font-size: 0.875em;
 	padding: 3px;
 }
 
-#header #search input::-webkit-input-placeholder {
+#header form input::-webkit-input-placeholder {
     color: #69625e;
 }
 
-#header #search input:-moz-placeholder {
+#header form input:-moz-placeholder {
     color: #69625e;
+}
+
+#header #navigation {
+	float: right;
+	padding: 10px 0 0;
 }
 
 #header #navigation ul {
@@ -139,20 +103,37 @@ a {
 }
 
 #container #content {
-	margin: 20px auto 0 20px;
+	margin: 20px auto;
 	max-width: 960px;
 }
 
-#container #content p {
+#container #content h1 {
 	color: #e0d1cc;
+	font-size: 1.375em;
+	margin: 0;
+}
+
+#container #content p {
+	color: #b3a6a2;
 	font-size: 0.875em;
 	line-height: 18px;
 	margin: 0 0 18px;
 	padding: 0;
 }
 
+#container #content a {
+	color: #8cb359;
+	text-decoration: none;
+}
+
+#container #content a:hover {
+	color: #fff;
+}
+
+
+/* - Footer ----- */
 #footer {
-	border-top: 1px solid #44403f;
+	border-top: 1px solid #393735;
 	margin: 20px auto 0;
 	padding: 20px 0 0;
 	text-align: center;
